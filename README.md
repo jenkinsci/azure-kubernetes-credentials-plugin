@@ -10,11 +10,12 @@
 # Introduction
 
 This plugin provides an extension for the [kubernetes-credentials-provider-plugin](https://github.com/jenkinsci/kubernetes-credentials-provider-plugin)
-plugin, and the [azure-branch-source-plugin](https://github.com/jenkinsci/azure-branch-source-plugin) that extend the kubernetes credentials provider to create the special credential type required by the azure-branch-source when interacting with a GitLab server instance.
+plugin, and the [azure-credentials-plugin](https://github.com/jenkinsci/azure-credentials-plugin) that extend the Kubernetes credentials provider to create the special credential type required by the azure-credentials when interacting with Azure Cloud.
 
 ## Usage
 
-This plugin consumes extends the kubernetes-credentials-provider-plugin to consume kubernetes secrets with a `"jenkins.io/credentials-type"` of `"gitlabToken"`. These secrets need to have a data property `"text"` that contains a base64 encoded `bearer token` for gitlab server.
+This plugin extends the kubernetes-credentials-provider-plugin to consume kubernetes secrets with a `"jenkins.io/credentials-type"` of `"azureManagedIdentity"` or `"azureServicePrincipal"`.
+See examples below on how to use them, or see more examples in the test cases.
 
 ### Example of Azure Managed Identity
 
