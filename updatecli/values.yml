@@ -4,5 +4,5 @@ github:
   username: "github-actions"
   token: "UPDATECLI_GITHUB_TOKEN"
   owner: "jenkinsci"
-  repository: "gitlab-kubernetes-credentials-plugin"
+  repository: "azure-kubernetes-credentials-plugin"
   branch: "main"
