@@ -38,65 +38,75 @@
 		<tag>${scmTag}</tag>
 	</scm>
 
-	<properties>
-		<changelist>999999-SNAPSHOT</changelist>
-		<gitHubRepo>jenkinsci/azure-kubernetes-credentials-plugin</gitHubRepo>
-		<jenkins.version>2.414.1</jenkins.version>
-	</properties>
-	<name>Azure Credentials - Kubernetes Integration</name>
-	<description>Integrates Azure Service Principal and Managed Identity credentials with the k8s credential provider</description>
-	<licenses>
-		<license>
-			<name>MIT License</name>
-			<url>https://opensource.org/licenses/MIT</url>
-		</license>
-	</licenses>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>io.jenkins.tools.bom</groupId>
-				<artifactId>bom-2.414.x</artifactId>
-				<version>2675.v1515e14da_7a_6</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-			<dependency>
-				<groupId>com.cloudbees.jenkins.plugins</groupId>
-				<artifactId>kubernetes-credentials-provider</artifactId>
-				<version>1.258.v95949f923a_a_e</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jenkins-ci.plugins</groupId>
-				<artifactId>azure-credentials</artifactId>
-				<version>254.v64da_8176c83a</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>com.cloudbees.jenkins.plugins</groupId>
-			<artifactId>kubernetes-credentials-provider</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jenkins-ci.plugins</groupId>
-			<artifactId>azure-credentials</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-	<repositories>
-		<repository>
-			<id>repo.jenkins-ci.org</id>
-			<url>https://repo.jenkins-ci.org/public/</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>repo.jenkins-ci.org</id>
-			<url>https://repo.jenkins-ci.org/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
+    <properties>
+        <changelist>999999-SNAPSHOT</changelist>
+        <gitHubRepo>jenkinsci/azure-kubernetes-credentials-plugin</gitHubRepo>
+        <jenkins.version>2.426.2</jenkins.version>
+    </properties>
+    <name>Azure Credentials - Kubernetes Integration</name>
+    <description>Integrates Azure Service Principal and Managed Identity credentials with the k8s credential provider</description>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.jenkins.tools.bom</groupId>
+                <artifactId>bom-2.426.x</artifactId>
+                <version>2718.v7e8a_d43b_3f0b_</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+	            <groupId>com.cloudbees.jenkins.plugins</groupId>
+	            <artifactId>kubernetes-credentials-provider</artifactId>
+	            <version>1.258.v95949f923a_a_e</version>
+	        </dependency>
+            <dependency>
+			    <groupId>org.jenkins-ci.plugins</groupId>
+			    <artifactId>azure-credentials</artifactId>
+			    <version>312.v0f3973cd1e59</version>
+		    </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>io.jenkins.plugins</groupId>
+            <artifactId>gitlab-branch-source</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cloudbees.jenkins.plugins</groupId>
+            <artifactId>kubernetes-credentials-provider</artifactId>
+        </dependency>
+        <dependency>
+		    <groupId>org.jenkins-ci.plugins</groupId>
+		    <artifactId>azure-credentials</artifactId>
+	    </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <repositories>
+		<!-- need to be removed when made public -->
+        <repository>
+            <id>devops-maven-local</id>
+            <name>devops-maven-local</name>
+         	<url>https://artifactory.ccta.dk/devops-maven-local</url>
+        </repository>
+<!--        <repository>
+            <id>repo.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/public/</url>
+        </repository> -->
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
