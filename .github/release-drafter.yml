@@ -1,2 +1,3 @@
 _extends: .github
 tag-template: azure-kubernetes-credentials-plugin-$NEXT_MINOR_VERSION
+name-template: Azure Kubernetes Credentials Plugin v$NEXT_PATCH_VERSION
