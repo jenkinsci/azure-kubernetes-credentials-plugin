@@ -17,12 +17,13 @@ import com.microsoft.azure.util.AzureCredentials;
 
 import io.fabric8.kubernetes.api.model.Secret;
 import io.fabric8.kubernetes.client.utils.Serialization;
+import io.jenkins.plugins.azurecredentialsk8s.AzureServicePrincipalCredentialsConvertor;
 
-public class AzureServicePrincipalCedentialsConvertorTest {
+public class AzureServicePrincipalCredentialsConvertorTest {
 
 	@Test
     public void canConvert() throws Exception {
-		AzureServicePrincipalCedentialsConvertor convertor = new AzureServicePrincipalCedentialsConvertor();
+		AzureServicePrincipalCredentialsConvertor convertor = new AzureServicePrincipalCredentialsConvertor();
         
 		
         assertThat("correct registration of valid type", convertor.canConvert("azureServicePrincipal"), is(true));
@@ -31,7 +32,7 @@ public class AzureServicePrincipalCedentialsConvertorTest {
 	
 	@Test
     public void canConvertAValidSecret() throws Exception {
-		AzureServicePrincipalCedentialsConvertor convertor = new AzureServicePrincipalCedentialsConvertor();
+		AzureServicePrincipalCredentialsConvertor convertor = new AzureServicePrincipalCredentialsConvertor();
 
         try (InputStream is = get("valid.yaml")) {
             Secret secret = Serialization.unmarshal(is, Secret.class);
@@ -54,7 +55,7 @@ public class AzureServicePrincipalCedentialsConvertorTest {
 	
 	@Test
     public void nonDefaultAzureEnv() throws Exception {
-		AzureServicePrincipalCedentialsConvertor convertor = new AzureServicePrincipalCedentialsConvertor();
+		AzureServicePrincipalCredentialsConvertor convertor = new AzureServicePrincipalCredentialsConvertor();
 
         try (InputStream is = get("nonDefaultAzureEnvironment.yaml")) {
             Secret secret = Serialization.unmarshal(is, Secret.class);
@@ -68,7 +69,7 @@ public class AzureServicePrincipalCedentialsConvertorTest {
 	
 	@Test
     public void failOnInvalidDataString() throws Exception {
-		AzureServicePrincipalCedentialsConvertor convertor = new AzureServicePrincipalCedentialsConvertor();
+		AzureServicePrincipalCredentialsConvertor convertor = new AzureServicePrincipalCredentialsConvertor();
 
         try (InputStream is = get("curruptDataFields.yaml")) {
             Object secrets = Serialization.unmarshal(is, Secret.class);
@@ -89,7 +90,7 @@ public class AzureServicePrincipalCedentialsConvertorTest {
 	
 	@Test
     public void defaultsToGlobalOnMissingScope() throws Exception {
-		AzureServicePrincipalCedentialsConvertor convertor = new AzureServicePrincipalCedentialsConvertor();
+		AzureServicePrincipalCredentialsConvertor convertor = new AzureServicePrincipalCredentialsConvertor();
 
         try (InputStream is = get("missingScope.yaml")) {
             Secret secret = Serialization.unmarshal(is, Secret.class);
@@ -103,7 +104,7 @@ public class AzureServicePrincipalCedentialsConvertorTest {
 	
 	@Test
     public void failOnMissingDataFields() throws Exception {
-		AzureServicePrincipalCedentialsConvertor convertor = new AzureServicePrincipalCedentialsConvertor();
+		AzureServicePrincipalCredentialsConvertor convertor = new AzureServicePrincipalCredentialsConvertor();
 
         try (InputStream is = get("missingDataFields.yaml")) {
             Object secrets = Serialization.unmarshal(is, Secret.class);
@@ -123,7 +124,7 @@ public class AzureServicePrincipalCedentialsConvertorTest {
 	
 	
     private static final InputStream get(String resource) {
-        InputStream is = AzureServicePrincipalCedentialsConvertorTest.class.getResourceAsStream("AzureServicePrincipalCedentialsConvertorTest/" + resource);
+        InputStream is = AzureServicePrincipalCredentialsConvertorTest.class.getResourceAsStream("AzureServicePrincipalCredentialsConvertorTest/" + resource);
         if (is == null) {
             fail("failed to load resource " + resource);
         }

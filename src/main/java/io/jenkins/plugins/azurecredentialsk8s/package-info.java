@@ -26,4 +26,4 @@
  */
 @edu.umd.cs.findbugs.annotations.ReturnValuesAreNonnullByDefault
 @edu.umd.cs.findbugs.annotations.DefaultAnnotation(edu.umd.cs.findbugs.annotations.NonNull.class)
-package io.jenkins.plugins.azurecredsk8s;
+package io.jenkins.plugins.azurecredentialsk8s;

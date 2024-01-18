@@ -33,7 +33,7 @@ metadata:
     "jenkins.io/credentials-description": "Azure managed identity"
 type: Opaque
 data:
-  subscripitonId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
+  subscriptionId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
   clientId: "Y2xpZW50LWlkCg==" # client-id
 ```
 
@@ -52,7 +52,7 @@ metadata:
     "jenkins.io/credentials-description": "Azure service principal"
 type: Opaque
 data:
-  subscripitonId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
+  subscriptionId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
   clientId: "Y2xpZW50LWlkCg==" # client-id
   clientSecret: "Y2xpZW50LXNlY3JldC1zZWNyZXQtc3RyaW5nCg==" # client-secret-secret-string
   tenantId: "dGVuYW50LWlkCg==" # tenant-id

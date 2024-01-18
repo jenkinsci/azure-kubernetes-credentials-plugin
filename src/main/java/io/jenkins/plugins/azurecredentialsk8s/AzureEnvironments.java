@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.jenkins.plugins.azurecredsk8s;
+package io.jenkins.plugins.azurecredentialsk8s;
 
 public enum AzureEnvironments {
 	AZURE("Azure"),

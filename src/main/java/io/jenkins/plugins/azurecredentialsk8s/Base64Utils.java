@@ -1,4 +1,4 @@
-package io.jenkins.plugins.azurecredsk8s;
+package io.jenkins.plugins.azurecredentialsk8s;
 
 
 import java.nio.ByteBuffer;

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package io.jenkins.plugins.azurecredsk8s;
+package io.jenkins.plugins.azurecredentialsk8s;
 
 
 import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.CredentialsConvertionException;
@@ -29,16 +29,15 @@ import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.SecretToCre
 import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.SecretUtils;
 import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.microsoft.azure.util.AzureCredentials;
-import com.nimbusds.oauth2.sdk.id.ClientID;
 
 import hudson.Extension;
 import io.fabric8.kubernetes.api.model.Secret;
 
 /**
- * SecretToCredentialConvertor that converts {@link om.microsoft.azure.util.AzureCredentials.ServicePrincipal}.
+ * SecretToCredentialConvertor that converts {@link com.microsoft.azure.util.AzureCredentials.ServicePrincipal}.
  */
 @Extension
-public class AzureServicePrincipalCedentialsConvertor extends SecretToCredentialConverter {
+public class AzureServicePrincipalCredentialsConvertor extends SecretToCredentialConverter {
 
     @Override
     public boolean canConvert(String type) {
@@ -55,7 +54,7 @@ public class AzureServicePrincipalCedentialsConvertor extends SecretToCredential
         CredentialsScope scope = SecretUtils.getCredentialScope(secret);
 
         // Assuming this is a service principal creds type
-        String subscriptionIdBase64 = SecretUtils.getNonNullSecretData(secret, "subscripitonId", "azureCredentials service principal credential is missing the subscriptionId");
+        String subscriptionIdBase64 = SecretUtils.getNonNullSecretData(secret, "subscriptionId", "azureCredentials service principal credential is missing the subscriptionId");
         String subscriptionId       = Base64Utils.base64DecodeToString(subscriptionIdBase64);
         if (subscriptionId != null && subscriptionId.length() > 0) {
         	subscriptionId = subscriptionId.trim();

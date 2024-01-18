@@ -11,6 +11,6 @@ metadata:
     "jenkins.io/credentials-description": "Azure managed identity"
 type: Opaque
 data:
-  subscripitonId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
+  subscriptionId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
   clientId: "Y2xpZW50LWlkCg==" # client-id
   azureEnvironment: "QXp1cmUgQ2hpbmEK" # Default to "Azure China"

@@ -11,9 +11,10 @@ metadata:
     "jenkins.io/credentials-description": "Azure service principal"
 type: Opaque
 data:
-  clientId: "Y2xpZW50LWlkCg==" # client-id
-  clientSecret: "Y2xpZW50LXNlY3JldC1zZWNyZXQtc3RyaW5nCg==" # client-secret-secret-string
-  tenantId: "dGVuYW50LWlkCg==" # tenant-id
+  subscriptionId: "123" # Not base64
+  clientId: "Y2xpZW50LWlkCg=="
+  clientSecret: "Y2xpZW50LXNlY3JldC1zZWNyZXQtc3RyaW5nCg==" 
+  tenantId: "dGVuYW50LWlkCg=="
 ---
 apiVersion: v1
 kind: Secret
@@ -27,9 +28,10 @@ metadata:
     "jenkins.io/credentials-description": "Azure service principal"
 type: Opaque
 data:
-  subscripitonId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
-  clientSecret: "Y2xpZW50LXNlY3JldC1zZWNyZXQtc3RyaW5nCg==" # client-secret-secret-string
-  tenantId: "dGVuYW50LWlkCg==" # tenant-id
+  subscriptionId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
+  clientId: "this" # Not base64
+  clientSecret: "Y2xpZW50LXNlY3JldC1zZWNyZXQtc3RyaW5nCg==" 
+  tenantId: "dGVuYW50LWlkCg=="
 ---
 apiVersion: v1
 kind: Secret
@@ -43,10 +45,10 @@ metadata:
     "jenkins.io/credentials-description": "Azure service principal"
 type: Opaque
 data:
-  subscripitonId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
-  clientId: "Y2xpZW50LWlkCg==" # client-id
-  tenantId: "dGVuYW50LWlkCg==" # tenant-id
----
+  subscriptionId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
+  clientId: "Y2xpZW50LWlkCg=="
+  clientSecret: "is not" # Not base64 
+  tenantId: "dGVuYW50LWlkCg=="
 ---
 apiVersion: v1
 kind: Secret
@@ -60,6 +62,13 @@ metadata:
     "jenkins.io/credentials-description": "Azure service principal"
 type: Opaque
 data:
-  subscripitonId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
-  clientId: "Y2xpZW50LWlkCg==" # client-id
-  clientSecret: "Y2xpZW50LXNlY3JldC1zZWNyZXQtc3RyaW5nCg==" # client-secret-secret-string 
+  subscriptionId: "MTIzNDQ1NjQ1Nwo=" # 1234456457
+  clientId: "Y2xpZW50LWlkCg=="
+  clientSecret: "Y2xpZW50LXNlY3JldC1zZWNyZXQtc3RyaW5nCg==" 
+  tenantId: "base64" # Not base64
+  
+  
+    
+  
+   
+  
