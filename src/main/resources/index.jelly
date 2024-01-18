@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    Integrates azureServicePrincipal and azureManagedIdentity credential types from the azure-credentials-plugin with the k8s credential provider.
+</div>
