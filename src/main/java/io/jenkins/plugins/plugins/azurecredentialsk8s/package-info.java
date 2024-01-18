@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 /**
- * Contains the gitlabToken credential provider.
+ * Contains the azureServicePrincipal and azureManagedIdentity credential provider.
  */
 @edu.umd.cs.findbugs.annotations.ReturnValuesAreNonnullByDefault
 @edu.umd.cs.findbugs.annotations.DefaultAnnotation(edu.umd.cs.findbugs.annotations.NonNull.class)

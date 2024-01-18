@@ -58,10 +58,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.jenkins.plugins</groupId>
-      <artifactId>gitlab-branch-source</artifactId>
-    </dependency>
-    <dependency>
       <groupId>com.cloudbees.jenkins.plugins</groupId>
       <artifactId>kubernetes-credentials-provider</artifactId>
     </dependency>
