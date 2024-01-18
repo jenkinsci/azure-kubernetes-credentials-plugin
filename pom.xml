@@ -92,16 +92,10 @@
         </dependency>
     </dependencies>
     <repositories>
-		<!-- need to be removed when made public -->
         <repository>
-            <id>devops-maven-local</id>
-            <name>devops-maven-local</name>
-         	<url>https://artifactory.ccta.dk/devops-maven-local</url>
-        </repository>
-<!--        <repository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
-        </repository> -->
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
