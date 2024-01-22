@@ -23,13 +23,11 @@
  */
 package io.jenkins.plugins.azurecredentialsk8s;
 
-
 import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.CredentialsConvertionException;
 import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.SecretToCredentialConverter;
 import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.SecretUtils;
 import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.microsoft.azure.util.AzureCredentials;
-
 import hudson.Extension;
 import io.fabric8.kubernetes.api.model.Secret;
 
@@ -46,61 +44,69 @@ public class AzureServicePrincipalCredentialsConvertor extends SecretToCredentia
 
     @Override
     public AzureCredentials convert(Secret secret) throws CredentialsConvertionException {
-    	// ensure we have some data
+        // ensure we have some data
         SecretUtils.requireNonNull(secret.getData(), "azureCredentials kubernetes definition contains no data");
-        
+
         String credsId = SecretUtils.getCredentialId(secret);
         String description = SecretUtils.getCredentialDescription(secret);
         CredentialsScope scope = SecretUtils.getCredentialScope(secret);
 
         // Assuming this is a service principal creds type
-        String subscriptionIdBase64 = SecretUtils.getNonNullSecretData(secret, "subscriptionId", "azureCredentials service principal credential is missing the subscriptionId");
-        String subscriptionId       = Base64Utils.base64DecodeToString(subscriptionIdBase64);
+        String subscriptionIdBase64 = SecretUtils.getNonNullSecretData(
+                secret,
+                "subscriptionId",
+                "azureCredentials service principal credential is missing the subscriptionId");
+        String subscriptionId = Base64Utils.base64DecodeToString(subscriptionIdBase64);
         if (subscriptionId != null && subscriptionId.length() > 0) {
-        	subscriptionId = subscriptionId.trim();
+            subscriptionId = subscriptionId.trim();
         } else {
-        	throw new CredentialsConvertionException("Can't continue as subscriptionId is empty");
+            throw new CredentialsConvertionException("Can't continue as subscriptionId is empty");
         }
-        
-        String clientIdBse64 = SecretUtils.getNonNullSecretData(secret, "clientId", "azureCredentials service principal credential is missing the clientId");
-        String clientId		 = Base64Utils.base64DecodeToString(clientIdBse64);
+
+        String clientIdBse64 = SecretUtils.getNonNullSecretData(
+                secret, "clientId", "azureCredentials service principal credential is missing the clientId");
+        String clientId = Base64Utils.base64DecodeToString(clientIdBse64);
         if (clientId != null && clientId.length() > 0) {
-        	clientId = clientId.trim();
+            clientId = clientId.trim();
         } else {
-        	throw new CredentialsConvertionException("Can't continue as clientId is empty");
+            throw new CredentialsConvertionException("Can't continue as clientId is empty");
         }
-        
-        String clientSecretBase64 = SecretUtils.getNonNullSecretData(secret, "clientSecret", "azureCredentials service principal credential is missing the clientSecret");
-        String clientSecret		  = Base64Utils.base64DecodeToString(clientSecretBase64);
+
+        String clientSecretBase64 = SecretUtils.getNonNullSecretData(
+                secret, "clientSecret", "azureCredentials service principal credential is missing the clientSecret");
+        String clientSecret = Base64Utils.base64DecodeToString(clientSecretBase64);
         if (clientSecret != null && clientSecret.length() > 0) {
-        	clientSecret = clientSecret.trim();
+            clientSecret = clientSecret.trim();
         } else {
-        	throw new CredentialsConvertionException("Can't continue as clientSecret is empty");
+            throw new CredentialsConvertionException("Can't continue as clientSecret is empty");
         }
-        
-        String tenantIdBase64 = SecretUtils.getNonNullSecretData(secret, "tenantId", "azureCredentials service principal credential is missing the tenantId");
-        String tenantId		  = Base64Utils.base64DecodeToString(tenantIdBase64);
+
+        String tenantIdBase64 = SecretUtils.getNonNullSecretData(
+                secret, "tenantId", "azureCredentials service principal credential is missing the tenantId");
+        String tenantId = Base64Utils.base64DecodeToString(tenantIdBase64);
         if (tenantId != null && tenantId.length() > 0) {
-        	tenantId = tenantId.trim();
+            tenantId = tenantId.trim();
         } else {
-        	throw new CredentialsConvertionException("Can't continue as tenantId is empty");
+            throw new CredentialsConvertionException("Can't continue as tenantId is empty");
         }
-        
-        AzureCredentials azureCredentials = new AzureCredentials(scope, credsId, description, subscriptionId, clientId, hudson.util.Secret.fromString(clientSecret));
+
+        AzureCredentials azureCredentials = new AzureCredentials(
+                scope, credsId, description, subscriptionId, clientId, hudson.util.Secret.fromString(clientSecret));
         // Configure credentials against the correct Azure environment
         azureCredentials.setTenant(tenantId);
-        
-        
+
         try {
-        	String azureEnvironment = Base64Utils.base64DecodeToString(SecretUtils.getNonNullSecretData(secret, "azureEnvironment", 
-        			"azureCredentials service principal credential is missing the azureEnvironment. Defaults to \"Azure\""));
-        	azureEnvironment = (azureEnvironment != null) ? azureEnvironment.trim() : "";
-        	azureCredentials.setAzureEnvironmentName(AzureEnvironments.valueOfLabel(azureEnvironment).label);
+            String azureEnvironment = Base64Utils.base64DecodeToString(
+                    SecretUtils.getNonNullSecretData(
+                            secret,
+                            "azureEnvironment",
+                            "azureCredentials service principal credential is missing the azureEnvironment. Defaults to \"Azure\""));
+            azureEnvironment = (azureEnvironment != null) ? azureEnvironment.trim() : "";
+            azureCredentials.setAzureEnvironmentName(AzureEnvironments.valueOfLabel(azureEnvironment).label);
         } catch (CredentialsConvertionException convertionException) {
-			azureCredentials.setAzureEnvironmentName(AzureEnvironments.AZURE.label);
-		}
+            azureCredentials.setAzureEnvironmentName(AzureEnvironments.AZURE.label);
+        }
 
-    	return azureCredentials;
+        return azureCredentials;
     }
-
 }

@@ -1,6 +1,6 @@
 package io.jenkins.plugins.azurecredentialsk8s;
 
-
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -10,8 +10,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import edu.umd.cs.findbugs.annotations.CheckForNull;
 
 public class Base64Utils {
 
@@ -53,5 +51,4 @@ public class Base64Utils {
         }
         return null;
     }
-	
 }

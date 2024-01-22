@@ -24,28 +24,28 @@
 package io.jenkins.plugins.azurecredentialsk8s;
 
 public enum AzureEnvironments {
-	AZURE("Azure"),
-	AZURE_CHINA("Azure China"),
-	AZURE_US_GOVERNMENT("Azure US Government");
-	
-	public final String label;
-	
-	private AzureEnvironments(String label) {
-		this.label = label;
-	}
-	
-	/**
-	 * Finds the environment based on its label. Defaults to "Azure"
-	 * @param label The label of an AzureEnvironment
-	 * @return AzureEnvironment
-	 */
-	public static AzureEnvironments valueOfLabel(String label) {
-		for (AzureEnvironments azureEnvironments : values()) {
-			if (azureEnvironments.label.equals(label)) {
-				return azureEnvironments;
-			}
-		}
-		// defaults to "Azure"
-		return valueOf(AzureEnvironments.AZURE.label);
-	}
+    AZURE("Azure"),
+    AZURE_CHINA("Azure China"),
+    AZURE_US_GOVERNMENT("Azure US Government");
+
+    public final String label;
+
+    private AzureEnvironments(String label) {
+        this.label = label;
+    }
+
+    /**
+     * Finds the environment based on its label. Defaults to "Azure"
+     * @param label The label of an AzureEnvironment
+     * @return AzureEnvironment
+     */
+    public static AzureEnvironments valueOfLabel(String label) {
+        for (AzureEnvironments azureEnvironments : values()) {
+            if (azureEnvironments.label.equals(label)) {
+                return azureEnvironments;
+            }
+        }
+        // defaults to "Azure"
+        return valueOf(AzureEnvironments.AZURE.label);
+    }
 }

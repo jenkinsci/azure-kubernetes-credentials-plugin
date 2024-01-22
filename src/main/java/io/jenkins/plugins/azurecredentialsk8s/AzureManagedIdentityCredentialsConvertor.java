@@ -23,13 +23,11 @@
  */
 package io.jenkins.plugins.azurecredentialsk8s;
 
-
 import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.CredentialsConvertionException;
 import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.SecretToCredentialConverter;
 import com.cloudbees.jenkins.plugins.kubernetes_credentials_provider.SecretUtils;
 import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.microsoft.azure.util.AzureImdsCredentials;
-
 import hudson.Extension;
 import io.fabric8.kubernetes.api.model.Secret;
 
@@ -46,46 +44,56 @@ public class AzureManagedIdentityCredentialsConvertor extends SecretToCredential
 
     @Override
     public AzureImdsCredentials convert(Secret secret) throws CredentialsConvertionException {
-    	// ensure we have some data
+        // ensure we have some data
         SecretUtils.requireNonNull(secret.getData(), "azureManagedIdentity kubernetes definition contains no data");
-        
+
         String credsId = SecretUtils.getCredentialId(secret);
         String description = SecretUtils.getCredentialDescription(secret);
         CredentialsScope scope = SecretUtils.getCredentialScope(secret);
 
         // Assuming this is a service principal creds type
-        String subscriptionIdBase64 = SecretUtils.getNonNullSecretData(secret, "subscriptionId", "azureManagedIdentity service principal credential is missing the subscriptionId");
-        String subscriptionId       = (subscriptionIdBase64 != null && subscriptionIdBase64.length() > 0) ? Base64Utils.base64DecodeToString(subscriptionIdBase64): "";
+        String subscriptionIdBase64 = SecretUtils.getNonNullSecretData(
+                secret,
+                "subscriptionId",
+                "azureManagedIdentity service principal credential is missing the subscriptionId");
+        String subscriptionId = (subscriptionIdBase64 != null && subscriptionIdBase64.length() > 0)
+                ? Base64Utils.base64DecodeToString(subscriptionIdBase64)
+                : "";
         if (subscriptionId != null && subscriptionId.length() > 0) {
-        	subscriptionId = subscriptionId.trim();
+            subscriptionId = subscriptionId.trim();
         } else {
-        	throw new CredentialsConvertionException("Can't continue as subscriptionId is empty");
+            throw new CredentialsConvertionException("Can't continue as subscriptionId is empty");
         }
-        
-        String clientIdBase64 = SecretUtils.getNonNullSecretData(secret, "clientId", "azureManagedIdentity service principal credential is missing the clientId");
-        String clientId       = (clientIdBase64 != null && clientIdBase64.length() > 0) ? Base64Utils.base64DecodeToString(clientIdBase64) : "";
+
+        String clientIdBase64 = SecretUtils.getNonNullSecretData(
+                secret, "clientId", "azureManagedIdentity service principal credential is missing the clientId");
+        String clientId = (clientIdBase64 != null && clientIdBase64.length() > 0)
+                ? Base64Utils.base64DecodeToString(clientIdBase64)
+                : "";
         if (clientId != null && clientId.length() > 0) {
-        	clientId = clientId.trim();
+            clientId = clientId.trim();
         } else {
-        	throw new CredentialsConvertionException("Can't continue as clientId is empty");
+            throw new CredentialsConvertionException("Can't continue as clientId is empty");
         }
-        
+
         AzureImdsCredentials azureImdsCredentials;
-        
+
         String azureEnvironment = "";
         try {
-        	azureEnvironment = Base64Utils.base64DecodeToString(SecretUtils.getNonNullSecretData(secret, "azureEnvironment", 
-        			"azureManagedIdentity service principal credential is missing the azureEnvironment. Defaults to \"Azure\""));
-        	azureEnvironment = (azureEnvironment != null) ? azureEnvironment : "";
+            azureEnvironment = Base64Utils.base64DecodeToString(
+                    SecretUtils.getNonNullSecretData(
+                            secret,
+                            "azureEnvironment",
+                            "azureManagedIdentity service principal credential is missing the azureEnvironment. Defaults to \"Azure\""));
+            azureEnvironment = (azureEnvironment != null) ? azureEnvironment : "";
         } catch (CredentialsConvertionException convertionException) {
-        	azureEnvironment = AzureEnvironments.AZURE.label;
-		}
+            azureEnvironment = AzureEnvironments.AZURE.label;
+        }
         azureImdsCredentials = new AzureImdsCredentials(scope, credsId, description, azureEnvironment.trim());
-        
+
         azureImdsCredentials.setClientId(clientId.trim());
         azureImdsCredentials.setSubscriptionId(subscriptionId.trim());
-        
-    	return azureImdsCredentials;
-    }
 
+        return azureImdsCredentials;
+    }
 }
